@@ -23,8 +23,9 @@ module Liquid
         assigns['content_for_layout'] = @view.content_for(:layout) if @view.content_for?(:layout)
         assigns.merge!(local_assigns.stringify_keys)
 
-        liquid = Liquid::Template.parse(template)
+        liquid = Liquid::Template.parse(template, line_numbers: true)
         render_method = (::Rails.env.development? || ::Rails.env.test?) ? :render! : :render
+
         liquid.send(render_method, assigns, filters: filters, registers: { view: @view, controller: @controller, helper: @helper }).html_safe
       end
 
