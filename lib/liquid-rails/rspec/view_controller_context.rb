@@ -36,7 +36,7 @@ module Liquid
             context[key] = value
           end
 
-          actual = Liquid::Template.parse(template).render!(context)
+          actual = Liquid::Template.parse(template, line_numbers: true).render!(context)
           expect(actual.to_s.strip).to eq(expected.to_s.strip)
         end
       end
