@@ -17,7 +17,8 @@ module Liquid
       initializer 'liquid-rails.setup_drop' do |app|
         [:active_record, :mongoid].each do |orm|
           ActiveSupport.on_load orm do
-            Liquid::Rails.setup_drop self
+            Liquid::Rails.setup_drop(self)
+            Liquid::Rails.setup_drop(Enumerator)
 
             if self == ActiveRecord::Base
               Liquid::Rails.setup_drop(ActiveRecord::Relation)
