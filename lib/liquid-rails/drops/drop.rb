@@ -98,7 +98,7 @@ module Liquid
         as_json.to_json(options)
       end
 
-      def before_method(method)
+      def liquid_method_missing(method)
         attributes[method.to_s]
       end
 
